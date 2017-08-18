@@ -230,7 +230,7 @@ Note that the highest count of errors by model varies between models, and also c
 I found a total of 16 images on the web.  Here are 5 of them.
 
 <img src="./sample-images/image0009.jpg" width="128">
-<img src="./sample-images/00284.ppm" width="128">
+<img src="./sample-images/00284.png" width="128">
 <img src="./sample-images/00217.png" width="128">
 <img src="./sample-images/image0007.jpg" width="128">
 <img src="./sample-images/image0012.jpg" width="128">
