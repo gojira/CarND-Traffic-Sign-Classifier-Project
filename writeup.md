@@ -82,7 +82,7 @@ First, in the [code](https://github.com/gojira/CarND-Traffic-Sign-Classifier-Pro
 
 The labels were loaded from signnames.csv into a pandas data frame for easy access.
 
-Next, I plotted the class distributions in each data set - training, validation, and test.  We can see that the datasets are not particularly balanced.  We see that the training and test sets are very well matched in class distribution. The validation set is roughly similar, but appears tob e quantized into increments of roughly 25.
+Next, I plotted the class distributions in each data set - training, validation, and test.  We can see that the datasets are not particularly balanced.  We see that the training and test sets are very well matched in class distribution. The validation set is roughly similar, but appears to be quantized into increments of roughly 25.
 
 ![alt text][image1]
 ![alt text][image2]
@@ -174,23 +174,23 @@ My final model results were:
 
 * training set accuracy of 0.99
 * validation set accuracy of 0.98
-* test set accuracy of 0.98
+* test set accuracy of 0.97 to 0.98 (varies by training run)
 
 
-I started by adapting the sample LeNet model and code.  I got reasonable results of over 0.95 validation accuracy.  However, I found LeNet a little cumbersome to modify and experiment with.
+I started by adapting the sample LeNet model and code.  I got reasonable results of over 0.95 validation accuracy.  However, I found LeNet cumbersome to modify and experiment with.
 
 As a result, I decided to start again from scratch using Keras with a standard CIFAR-10 CNN model.  I immediately got better results with the Keras model so I switched all subsequent efforts to Keras.
 
-For Keras, I started with Keras 1 with Tensorflow 0.12 in the carnd-term1 environment but encountered errors.  Because Keras 2 is better maintained, I switched to Keras 2 with Tensorflow 1.2 in its own environment.  I got much better results with this compared to trying with the carnd-term1 environment.
+For Keras, I started with Keras 1 with Tensorflow 0.12 in the carnd-term1 environment but encountered errors.  Because Keras 2 is better maintained, I switched to Keras 2 with Tensorflow 1.2 in its own environment.  I got better results with this compared to trying with the carnd-term1 environment.
 
-With Keras, it was very quick and easy to experiment with dropout, regularization, and batch normalization.  In my experiements, I found dropout gave the biggest bang in terms of adding generalization to the model by better validation and test set results.  My model includes L2 regularization as it also improved results although less so than dropout.
+With Keras, it was quick and easy to experiment with dropout, regularization, and batch normalization.  In my experiements, I found dropout gave the biggest bang in terms of adding generalization to the model by better validation and test set results.  My model includes L2 regularization as it also improved results although less so than dropout.
 
 I did manual tuning of the following:
 
 * Optimizer: I tried standard SGD and Adam.  SGD was considerably slower (it took an order or two magnitude slower at first and rather than searching for better hyperparameters with SGD, I spent more time tuning Adam)
-* Learning rate: I experimented with learning rate with my initial LeNet model as well as with SGD, but found Adam converged fast and with good accuracy.
+* Learning rate: I experimented with learning rate with my initial LeNet model as well as with Keras.
 * Dropout keep rate: I tried several different dropout percentages including 0, 0.25, 0.5, 0.8, and 1.0.  In the end the standard 0.5 and 0.25 worked well.  Dropout had the biggest contribution to reducing overfitting and improving test set accuracy.
-* L2 regularization: I experimented both with and without and found using parameters of about 0.001 worked well.
+* L2 regularization: I ran training runs with and without L2 regularization.  L2 regularization improved generalization by improving test set accuracy.  I found using parameters of about 0.001 worked well.
 * Train with and without batch normalization.  Batch normalization generally led to faster improvements in test set accuracy, and better accuracy in validation and test set.
 
 My result notebook includes 3 different models:
@@ -231,7 +231,7 @@ I found a total of 16 images on the web.  Here are 5 of them.
 
 <img src="./sample-images/image0009.jpg" width="128">
 <img src="./sample-images/00284.ppm" width="128">
-<img src="./sample-images/00217.ppm" width="128">
+<img src="./sample-images/00217.png" width="128">
 <img src="./sample-images/image0007.jpg" width="128">
 <img src="./sample-images/image0012.jpg" width="128">
 
@@ -274,7 +274,7 @@ This model assigns probabilities as follows
 3. Probability around .90 for 2 out of 16
 4. Probability around .80 for 1 out of 16
 
-THe lowest probability was assigned to sample 15, which has the 30kph sign with text "ZONE".  It is natural for the probability to be lower here as it is not in the training set, but fortunately the model generalizes enough that it still correctly predicts it.
+The lowest probability was assigned to sample 15, which has the 30kph sign with text "ZONE".  It is natural for the probability to be lower here as it is not in the training set, but fortunately the model generalizes enough that it still correctly predicts it.
 
 The 2 samples wih around 0.90 probability are both triangular, one pointing 'up' and one pointing 'down'.  One of them is a yield sign with text in it.  While this seems consistent with the 30kph+ZONE example, for most runs I made with the model, both yield signs usually were predicted with high probability so it is not immediately clear why it had a lower probability in this final run.
 
@@ -311,7 +311,7 @@ In addition, FeatureMap 2, 12, 17, and 28 have darker regions that are clearly p
 Layer 5 is a Relu activation layer.  For this I am showing the children crossing sign and the 80kph sign.
 
 <img src="./sample-images/image0002.jpg" width="128">
-<img src="./sample-images/00217.ppm" width="128">
+<img src="./sample-images/00217.png" width="128">
 
 ![alt text][activation2_5]
 ![alt text][activation3_5]
