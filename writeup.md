@@ -278,6 +278,10 @@ The lowest probability was assigned to sample 15, which has the 30kph sign with 
 
 The 2 samples wih around 0.90 probability are both triangular, one pointing 'up' and one pointing 'down'.  One of them is a yield sign with text in it.  While this seems consistent with the 30kph+ZONE example, for most runs I made with the model, both yield signs usually were predicted with high probability so it is not immediately clear why it had a lower probability in this final run.
 
+In many of my experiments, the models computed reasonable relative probabilities.  For example, for speed limit signs, the second and third highest probabilities are often other speed limit signs.  However, in this last run that I have captured in the notebook and HTML file, this is not the case.  
+
+In cases such as the first 30kph where the model is effectively assigning 100% to the correct interpretation, it may assign other probabilities more or less randomly.  In the case of the 30kph image with the string "ZONE", the second highest probability is "keep right" at 3% and priority road at 1%.  30kph is not in the top 5 which is unexpected.
+
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
