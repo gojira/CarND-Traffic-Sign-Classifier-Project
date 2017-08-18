@@ -278,9 +278,9 @@ The lowest probability was assigned to sample 15, which has the 30kph sign with 
 
 The 2 samples wih around 0.90 probability are both triangular, one pointing 'up' and one pointing 'down'.  One of them is a yield sign with text in it.  While this seems consistent with the 30kph+ZONE example, for most runs I made with the model, both yield signs usually were predicted with high probability so it is not immediately clear why it had a lower probability in this final run.
 
-In many of my experiments, the models computed reasonable relative probabilities.  For example, for speed limit signs, the second and third highest probabilities are often other speed limit signs.  However, in this last run that I have captured in the notebook and HTML file, this is not the case.  
+In many of my experiments, the models computed reasonable relative probabilities.  For example, for speed limit signs, the top 5 probabilities often include other speed limit signs.  In the test run that I am submitting, the simple 30kph sign yields 80, 70, and 60kph signs in the 2nd to 5th highest probabilities.  But the 80kph image (which is a night time image) does not include other speed limit signs in the top 5.
 
-In cases such as the first 30kph where the model is effectively assigning 100% to the correct interpretation, it may assign other probabilities more or less randomly.  In the case of the 30kph image with the string "ZONE", the second highest probability is "keep right" at 3% and priority road at 1%.  30kph is not in the top 5 which is unexpected.
+And finally, in the case of the 30kph image with the string "ZONE", the second highest probability is "keep right" at 3% and priority road at 1%.  It would be reasonable to expect 30kph in the top 5 but it is not!
 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
@@ -323,7 +323,7 @@ Layer 5 is a Relu activation layer.  For this I am showing the children crossing
 There are some significant differences in the characteristics of the two images.
 
 1. Background: The 80kph image is a nightshot with dark background.  The children crossing sign has daytime sky adn tree branches behind the sign.
-2. Shape: One sigh is circular and one is triangular.
+2. Shape: One sign is circular and one is triangular.
 3. Light: The 80kph sign has very high luminosity in the sign, where the other sign is less pronounced.
 4. Complexitiy: The children crossing image has a lot more sign and shape segments compared to the 80kph image which is simpler. The 80kps sign has no straight lines where the other one has both straight lines and other types of line segments.
 
